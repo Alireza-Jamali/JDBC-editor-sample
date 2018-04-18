@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid id="panel" columns="2" border="1"
+                         cellpadding="10" cellspacing="1">
+                <f:facet name="header">
+                    <h:outputText value="Login"/>
+                </f:facet>
+                <h:outputLabel value="URL"/>
+                <h:inputText value="#{db.url}" style="width: 500px" title="ENTER YOUR DATABASE NAME AFTER URL"/>
+                <h:outputLabel value="Username" />
+                <h:inputText value="#{db.username}"/>
+                <h:outputLabel value="Password" />
+                <h:inputSecret value="#{db.password}"/>
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <h:commandButton id="submit" value="Connect" action="#{db.connect()}" image="#{db.cnb}" style="width: 40px; height: 40px"/>
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+        </h:form>
+        <br /> <br /> <br /> 
+        <h:form id="tab">
+            <h:panelGrid columns="2" >
+                <p:inputText value="#{en.table1}" placeholder="Table1"/>      
+                <p:inputText value="#{en.idT1}" size="4" placeholder="ID"/>
+                
+                <p:inputText value="#{en.table2}" placeholder="Table2"/>
+                <p:inputText value="#{en.fkT1}" size="4" placeholder="ID"/>
+                <p:inputText value="#{en.fkT2}" size="4" placeholder="FK"/>
+            </h:panelGrid>
+            <p:dataTable id="table" value="#{en.entityList}" var="tableList" emptyMessage="">
+                <p:column>
+                    <p:inputText value="#{tableList.column1}"/>
+                    <p:inputText value="#{tableList.column2}"/>
+                </p:column>
+            </p:dataTable>
+            <p:commandButton update="table" value="Add Column" action="#{en.add()}"/><br />             
+
+            <p:commandButton value="clean" action="#{handle.startClean()}" onmouseover=""/>
+            <p:commandButton value="stair" action="#{handle.startStair()}"/>
+            <p:commandButton value="each" action="#{handle.startEach()}"/>
+            <p:commandButton value="FK" action="#{handle.startFk()}"/>
+            <p:commandButton value="update" action="#{handle.startUp()}"/><br />
+            <p:commandButton value="reset" action="#{handle.reset()}" update="tab"/>
+        </h:form>
+        
+    </h:body>
+</html>
+
